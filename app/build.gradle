@@ -31,12 +31,9 @@ model {
         cppFlags.add("-I${file("src/main/jni/support-lib")}".toString())
         cppFlags.add("-I${file("src/main/jni/djinni_generated/cpp")}".toString())
         cppFlags.add("-I${file("src/main/jni/djinni_generated/jni")}".toString())
-        cppFlags.add("-latomic")
-        cppFlags.add("-DGXX_EXPERIMENTAL_CXX0X")
         cppFlags.add("-frtti")
         cppFlags.add("-std=c++11")
         cppFlags.add("-fexceptions")
-        cppFlags.add("-pthread")
     }
     android.buildTypes {
         release {
