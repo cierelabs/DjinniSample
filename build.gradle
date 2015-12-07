@@ -4,7 +4,6 @@ apply plugin: 'com.github.ben-manes.versions'
 buildscript {
     repositories {
         jcenter()
-        mavenCentral()
     }
     dependencies {
         classpath 'me.tatarka:gradle-retrolambda:3.2.2'
@@ -20,7 +19,5 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        mavenCentral()
-
     }
 }
