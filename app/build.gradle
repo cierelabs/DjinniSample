@@ -27,16 +27,16 @@ model {
 //        toolchainVersion = "3.5"
 //        ldLibs    = ["android", "log"]
         stl       = "c++_static"
-        cppFlags += "-I${file("src/main/jni")}".toString()
-        cppFlags += "-I${file("src/main/jni/support-lib")}".toString()
-        cppFlags += "-I${file("src/main/jni/djinni_generated/cpp")}".toString()
-        cppFlags += "-I${file("src/main/jni/djinni_generated/jni")}".toString()
-        cppFlags += "-latomic"
-        cppFlags += "-DGXX_EXPERIMENTAL_CXX0X"
-        cppFlags += "-frtti"
-        cppFlags += "-std=c++11"
-        cppFlags += "-fexceptions"
-        cppFlags += "-pthread"
+        cppFlags.add("-I${file("src/main/jni")}".toString())
+        cppFlags.add("-I${file("src/main/jni/support-lib")}".toString())
+        cppFlags.add("-I${file("src/main/jni/djinni_generated/cpp")}".toString())
+        cppFlags.add("-I${file("src/main/jni/djinni_generated/jni")}".toString())
+        cppFlags.add("-latomic")
+        cppFlags.add("-DGXX_EXPERIMENTAL_CXX0X")
+        cppFlags.add("-frtti")
+        cppFlags.add("-std=c++11")
+        cppFlags.add("-fexceptions")
+        cppFlags.add("-pthread")
     }
     android.buildTypes {
         release {
