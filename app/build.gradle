@@ -1,6 +1,8 @@
 //apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.android.model.application'
 
+def djinniGeneratedSourceDir = new File(buildDir, "djinni_generated")
+
 model {
     android {
         compileSdkVersion = 23
@@ -29,8 +31,7 @@ model {
         stl       = "c++_static"
         cppFlags.add("-I${file("src/main/jni")}".toString())
         cppFlags.add("-I${file("src/main/jni/support-lib")}".toString())
-        cppFlags.add("-I${file("src/main/jni/djinni_generated/cpp")}".toString())
-        cppFlags.add("-I${file("src/main/jni/djinni_generated/jni")}".toString())
+        cppFlags.add("-I${djinniGeneratedSourceDir}/cpp".toString())
         cppFlags.add("-frtti")
         cppFlags.add("-std=c++11")
         cppFlags.add("-fexceptions")
@@ -67,6 +68,23 @@ model {
 //        }
 //        // To include all cpu architectures, leaves abiFilters empty
         create("all")
+    }
+
+    android.sources {
+        main {
+            jni {
+                source {
+                    srcDirs 'src/main/jni'
+                    srcDirs += djinniGeneratedSourceDir
+                }
+            }
+            java {
+                source {
+                    srcDirs 'src/main/java'
+                    srcDirs += djinniGeneratedSourceDir
+                }
+            }
+        }
     }
 }
 
