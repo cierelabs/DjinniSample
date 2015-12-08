@@ -21,7 +21,14 @@ task runDjinni(type: Exec) {
     args += ["--idl", "fibonacci.djinni"]
 }     
 
+def djinniSupportDir = new File(buildDir, "djinni_src/support-lib")
 task copyDjinniSupportLib(type: Copy) {
+    from "${djinniDir}/support-lib"
+    destinationDir djinniSupportDir
+    include "*.cpp" include "*.hpp"
+    include "jni/*.cpp" include "jni/*.hpp"
+}
+
 model {
     android {
         compileSdkVersion = 23
@@ -49,7 +56,8 @@ model {
 //        ldLibs    = ["android", "log"]
         stl       = "c++_static"
         cppFlags.add("-I${file("src/main/jni")}".toString())
-        cppFlags.add("-I${file("src/main/jni/support-lib")}".toString())
+        cppFlags.add("-I${djinniSupportDir}".toString())
+        cppFlags.add("-I${djinniSupportDir}/jni".toString())
         cppFlags.add("-I${djinniGeneratedSourceDir}/cpp".toString())
         cppFlags.add("-frtti")
         cppFlags.add("-std=c++11")
@@ -95,6 +103,7 @@ model {
                 source {
                     srcDirs 'src/main/jni'
                     srcDirs += djinniGeneratedSourceDir
+                    srcDirs += djinniSupportDir
                 }
             }
             java {
